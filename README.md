@@ -6,6 +6,10 @@ Fast Purge Cloud Function for GCP to purge specific akamai cache by "cache-tags"
 
 Estimated Time to Purge (We have witnessed seconds to minutes), but the api request will return a EstimatedTime. It appears to always say 5 seconds.
 
+**From a Fastly Representative at 4:18:07 PM on 5.19.2020**
+
+```The SLA for FastPurge might go to sometimes up to 7-8mins In best scenario within 1 mins. It totally depend on the Purge server traffic.```
+
 Documentation: https://developer.akamai.com/api/core_features/fast_purge/v3.html#tagrequest
 ```estimatedSeconds	Integer	The estimated number of seconds before the purge is to complete.```
 
