@@ -1,0 +1,29 @@
+{
+  "name": "akamai-tag-purge",
+  "version": "0.1.0",
+  "description": "Cloud function to hit Akamai's API to purge cache tags",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zesty-io/akamai-tag-purge.git"
+  },
+  "keywords": [
+    "akamai",
+    "nodejs",
+    "purge",
+    "zesty-io"
+  ],
+  "author": "Zesty.io",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zesty-io/akamai-tag-purge/issues"
+  },
+  "homepage": "https://github.com/zesty-io/akamai-tag-purge#readme",
+  "dependencies": {
+    "akamai": "^0.10.1",
+    "env-yaml": "^0.1.2"
+  }
+}
