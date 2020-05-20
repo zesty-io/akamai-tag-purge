@@ -6,11 +6,16 @@ var data = 'bodyData';
 // Supply the path to your .edgerc file and name
 // of the section with authorization to the client
 // you are calling (default section is 'default')
-var eg = new EdgeGrid({
-  path: './.edgerc',
-  section: 'default'
-});
+// var eg = new EdgeGrid({
+//   path: './.edgerc',
+//   section: 'default'
+// });
 
+var eg = new EdgeGrid(
+  process.env.AKAMAI_CLIENT_TOKEN, 
+  process.env.AKAMAI_CLIENT_SECRET, 
+  process.env.AKAMAI_ACCESS_TOKEN, 
+  process.env.AKAMAI_HOST);
 
 /// by hostname (not in use)
 var byHostName ={
