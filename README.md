@@ -2,17 +2,29 @@
 
 Fast Purge Cloud Function for GCP to purge specific akamai cache by "cache-tags"
 
-## How to Test
+## How to Configure and Test
 
-1. Run in terminal at root: `npm install`
-2. Copy `.env.example.yml` to `.env.yml` and replace the values from API keys you get from AKAMAI
+Prequisistes: have NPM (node package manager) and NVM (node version manager) installed
+
+1. Run in terminal at root: `nvm use v10` and `npm install`
+2. Copy `.env.example.yml` to `.env.yml` and replace the values from API keys you get from AKAMAI with purge and admin permission. Note the env is either stage or prod. The service key is sent when making a post request to prevent spam or unauthorized requests
 3. Run in terminal at root: `npm run test` 
+
+You should see out like this:
+
+```
+{"detail": "Request accepted", "estimatedSeconds": 5, "purgeId": "XXXXXXXX-9a53-XXXXX-aa24-498812ce210a", "supportId": "17PY15XXXXXXXX567174-24900000056", "httpStatus": 201}
+```
+
+If you do not get that output try to issue new API keys
 
 ## How to deploy to a GCP cloud function
 
 1. Install gcloud sdk cli tools https://cloud.google.com/sdk/docs#install_the_latest_cloud_tools_version_cloudsdk_current_version
 2. Authenticate with google https://cloud.google.com/sdk/gcloud/reference/auth
 3. `gcloud  functions deploy akamaiFastPurge --env-vars-file .env.yml --runtime nodejs8 --trigger-http --project YOUR-PROJECT-NAME`
+
+## How to hii
 
 # Notes on Akamai Fast Purge 
 
