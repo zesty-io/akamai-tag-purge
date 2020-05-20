@@ -16,13 +16,13 @@ You should see out like this:
 {"detail": "Request accepted", "estimatedSeconds": 5, "purgeId": "XXXXXXXX-9a53-XXXXX-aa24-498812ce210a", "supportId": "17PY15XXXXXXXX567174-24900000056", "httpStatus": 201}
 ```
 
-If you do not get that output try to issue new API keys
+If you do not get that output try to issue new API keys. Make sure they have purge and admin permission. Also check the Akamai envirnoment you are testing against.
 
 ## How to deploy to a GCP cloud function
 
 1. Install gcloud sdk cli tools https://cloud.google.com/sdk/docs#install_the_latest_cloud_tools_version_cloudsdk_current_version
 2. Authenticate with google https://cloud.google.com/sdk/gcloud/reference/auth
-3. `gcloud  functions deploy akamaiFastPurge --env-vars-file .env.yml --runtime nodejs8 --trigger-http --project YOUR-PROJECT-NAME`
+3. `gcloud  functions deploy akamaiFastPurge --env-vars-file .env.yml --runtime nodejs10 --trigger-http --project YOUR-PROJECT-NAME`
 
 ## How to hii
 

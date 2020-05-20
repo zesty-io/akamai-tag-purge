@@ -24,6 +24,7 @@
   "homepage": "https://github.com/zesty-io/akamai-tag-purge#readme",
   "dependencies": {
     "akamai": "^0.10.1",
+    "cors": "^2.8.5",
     "edgegrid": "^3.0.8",
     "env-yaml": "^0.1.2"
   }
