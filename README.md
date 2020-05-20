@@ -2,9 +2,21 @@
 
 Fast Purge Cloud Function for GCP to purge specific akamai cache by "cache-tags"
 
-## About Akamai Fast Purge 
+## How to Test
 
-Estimated Time to Purge (We have witnessed seconds to minutes), but the api request will return a EstimatedTime. It appears to always say 5 seconds.
+1. Run in terminal at root: `npm install`
+2. Copy `.env.example.yml` to `.env.yml` and replace the values from API keys you get from AKAMAI
+3. Run in terminal at root: `npm run test` 
+
+## How to deploy to a GCP cloud function
+
+1. Install gcloud sdk cli tools https://cloud.google.com/sdk/docs#install_the_latest_cloud_tools_version_cloudsdk_current_version
+2. Authenticate with google https://cloud.google.com/sdk/gcloud/reference/auth
+3. `gcloud  functions deploy akamaiFastPurge --env-vars-file .env.yml --runtime nodejs8 --trigger-http --project YOUR-PROJECT-NAME`
+
+# Notes on Akamai Fast Purge 
+
+The request returns an Estimated Time to Purge value (EstimatedTime) upon 201, it has the value of 5 seconds. We have witnessed seconds to up to 10 minutes.
 
 **From a Fastly Representative at 4:18:07 PM on 5.19.2020**
 
