@@ -37,6 +37,44 @@ If you do not get that output try to issue new API keys. Make sure they have pur
   }
   ```
 
+**Examples**
+
+Curl 
+
+```
+curl --location --request POST 'https://us-central1-PROJECT-NAME.cloudfunctions.net/akamaiFastPurge' \
+--header 'X-Auth: xxxxx' \
+--header 'Content-Type: text/plain' \
+--data-raw '{
+      "objects": [
+          "Foo",
+          "Bar"
+      ]
+  }'
+```
+
+Vanilla Javascript
+
+```
+var myHeaders = new Headers();
+myHeaders.append("X-Auth", "xxxxx");
+myHeaders.append("Content-Type", "text/plain");
+
+var raw = "{\n      \"objects\": [\n          \"Foo\",\n          \"Bar\"\n      ]\n  }";
+
+var requestOptions = {
+  method: 'POST',
+  headers: myHeaders,
+  body: raw,
+  redirect: 'follow'
+};
+
+fetch("https://us-central1-PROJECT-NAME.cloudfunctions.net/akamaiFastPurge", requestOptions)
+  .then(response => response.text())
+  .then(result => console.log(result))
+  .catch(error => console.log('error', error));
+```
+
 Note
 
 # Caveats of Akamai Fast Purge 
