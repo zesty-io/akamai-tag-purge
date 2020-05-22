@@ -24,9 +24,22 @@ If you do not get that output try to issue new API keys. Make sure they have pur
 2. Authenticate with google https://cloud.google.com/sdk/gcloud/reference/auth
 3. `gcloud  functions deploy akamaiFastPurge --env-vars-file .env.yml --runtime nodejs10 --trigger-http --project YOUR-PROJECT-NAME`
 
-## How to hii
+## How to Purge the cache hitting the remote Google Cloud function
 
-# Notes on Akamai Fast Purge 
+1. Setup a POST request to `https://us-central1-zesty-dev.cloudfunctions.net/akamaiFastPurge` note `us-central1` will be your deploy location and `zesty-dev` will be your GCP environement name
+2. In that post request include a header `'X-Auth' : SERVICE_KEY` and a raw body:
+```
+{
+      "objects": [
+          "CACHE-KEY",
+          "ZUID"
+      ]
+  }
+  ```
+
+Note
+
+# Caveats of Akamai Fast Purge 
 
 The request returns an Estimated Time to Purge value (EstimatedTime) upon 201, it has the value of 5 seconds. We have witnessed seconds to up to 10 minutes.
 

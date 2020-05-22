@@ -19,6 +19,17 @@ const exportAkamaiFastPurge = async (req, res) => {
     return res.status(400).send("Error: expected HTTP POST.");
   }
 
+  if (!req.get("X-Auth")) {
+    return res.status(400).send(`Error: Requires "X-Auth" header with Service Key`);
+  }
+
+  let authKey = req.get("X-Auth");
+  if(authKey !== process.env.SERVICE_KEY){
+      return res.status(400).send("Error: service key does not match.");
+  }
+
+
+
   var EdgeGrid = require('edgegrid');
 
   var eg = new EdgeGrid(
@@ -29,12 +40,14 @@ const exportAkamaiFastPurge = async (req, res) => {
 
   /// caches tag
   
-  var cacheTags = {
+  var cacheTags = JSON.parse(req.body)
+  
+  /*{
       "objects": [
           "Foo",
           "Bar"
       ]
-  }
+  }*/
 
   var headers = {
     "Content-Type": "application/json"
@@ -51,7 +64,11 @@ const exportAkamaiFastPurge = async (req, res) => {
     if(error != null){
       res.send(error);
     } else {
-      res.json(body);
+      res.json({
+        'message' : 'Purge request sent successfully. Cache can refresh as soon as 5 seconds or as long as 8 minutes per Akamai SLA.',
+        'cacheTagsPurged' : cacheTags.objects,
+        'akamaiResponse' : JSON.parse(body)
+      });
     }
   });
 }
