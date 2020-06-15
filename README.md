@@ -81,7 +81,7 @@ Note
 
 The request returns an Estimated Time to Purge value (EstimatedTime) upon 201, it has the value of 5 seconds. We have witnessed seconds to up to 10 minutes.
 
-**From a Fastly Representative at 4:18:07 PM on 5.19.2020**
+**From a Akamai Representative at 4:18:07 PM on 5.19.2020**
 
 ```The SLA for FastPurge might go to sometimes up to 7-8mins In best scenario within 1 mins. It totally depend on the Purge server traffic.```
 
