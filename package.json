@@ -4,7 +4,7 @@
   "description": "Cloud function to hit Akamai's API to purge cache tags",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node index.test.js"
   },
   "repository": {
     "type": "git",
