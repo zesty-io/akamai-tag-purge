@@ -1,38 +1,5 @@
 require("env-yaml").config();
 
-// var EdgeGrid = require("edgegrid");
-
-// var eg = new EdgeGrid(
-//   process.env.AKAMAI_CLIENT_TOKEN,
-//   process.env.AKAMAI_CLIENT_SECRET,
-//   process.env.AKAMAI_ACCESS_TOKEN,
-//   process.env.AKAMAI_HOST
-// );
-
-// /// caches tag
-// var cacheTags = {
-//   objects: ["Foo", "Bar"],
-// };
-
-// var headers = {
-//   "Content-Type": "application/json",
-// };
-
-// eg.auth({
-//   path: `/ccu/v3/invalidate/tag/${process.env.AKAMAI_ENV}`,
-//   method: "POST",
-//   headers: headers,
-//   body: cacheTags,
-// });
-
-// eg.send(function (error, response, body) {
-//   if (error != null) {
-//     console.log("Error", error);
-//   } else {
-//     console.log("Success", body);
-//   }
-// });
-
 const test = require("tape");
 const sinon = require("sinon");
 const { createRequest, createResponse } = require("node-mocks-http");
@@ -58,7 +25,9 @@ test("purgeAkamai: 400 Error: expected HTTP POST", async (t) => {
 
   t.doesNotThrow(() => sinon.assert.calledOnceWithExactly(res.status, 400));
   t.doesNotThrow(() =>
-    sinon.assert.calledOnceWithExactly(res.json, "Error: expected HTTP POST")
+    sinon.assert.calledOnceWithExactly(res.json, {
+      error: "Error: expected HTTP POST",
+    })
   );
 
   t.end();
@@ -83,10 +52,9 @@ test(`purgeAkamai: 400 Error: Requires "X-Auth" header with Service Key`, async 
 
   t.doesNotThrow(() => sinon.assert.calledOnceWithExactly(res.status, 400));
   t.doesNotThrow(() =>
-    sinon.assert.calledOnceWithExactly(
-      res.json,
-      `Error: Requires "X-Auth" header with Service Key`
-    )
+    sinon.assert.calledOnceWithExactly(res.json, {
+      error: `Error: Requires "X-Auth" header with Service Key`,
+    })
   );
 
   t.end();
@@ -112,20 +80,22 @@ test(`purgeAkamai: 401 Error: Unauthorized`, async (t) => {
 
   t.doesNotThrow(() => sinon.assert.calledOnceWithExactly(res.status, 401));
   t.doesNotThrow(() =>
-    sinon.assert.calledOnceWithExactly(res.json, `Error: Unauthorized`)
+    sinon.assert.calledOnceWithExactly(res.json, {
+      error: `Error: Unauthorized`,
+    })
   );
 
   t.end();
 });
 
-test(`purgeAkamai: 401 Error: Unauthorized`, async (t) => {
+test(`purgeAkamai: 200 Success`, async (t) => {
   const req = createRequest({
     method: "POST",
     url: "/",
     params: {},
-    body: {
+    body: JSON.stringify({
       objects: ["Foo", "Bar"],
-    },
+    }),
     headers: {
       "Content-Type": "application/json",
       "X-Auth": process.env.SERVICE_KEY,
@@ -138,10 +108,18 @@ test(`purgeAkamai: 401 Error: Unauthorized`, async (t) => {
 
   await purgeAkamai(req, res);
 
-  t.doesNotThrow(() => sinon.assert.calledOnceWithExactly(res.status, 401));
-  t.doesNotThrow(() =>
-    sinon.assert.calledOnceWithExactly(res.json, `Error: Unauthorized`)
-  );
+  t.doesNotThrow(() => {
+    sinon.assert.calledOnceWithExactly(res.status, 200);
+  }, "res.status should be called with 200");
+
+  // NOTE: leaving these test case here to document
+  // we can not test it as the response body given to the json
+  // function is dynamic due to the nature of the akamai response
+  // t.doesNotThrow(() =>
+  //   sinon.assert.calledOnceWithExactly(res.json, {
+  //     error: `Error: Unauthorized`,
+  //   })
+  // );
 
   t.end();
 });
