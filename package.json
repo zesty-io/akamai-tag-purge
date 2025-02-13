@@ -1,10 +1,11 @@
 {
   "name": "akamai-tag-purge",
-  "version": "0.1.0",
-  "description": "Cloud function to hit Akamai's API to purge cache tags",
+  "version": "1.0.0",
+  "description": "GCP cloud function to purge by cache tags in Akamai",
   "main": "index.js",
   "scripts": {
-    "test": "node test.js"
+    "test": "node index.test.js",
+    "deploy:example": "gcloud functions deploy akamaiFastPurge --runtime=nodejs20 --region=us-central1 --trigger-http --allow-unauthenticated --project=PROJECT --memory=256mb"
   },
   "repository": {
     "type": "git",
@@ -23,9 +24,13 @@
   },
   "homepage": "https://github.com/zesty-io/akamai-tag-purge#readme",
   "dependencies": {
-    "akamai": "^0.10.1",
+    "akamai-edgegrid": "^3.5.2",
     "cors": "^2.8.5",
-    "edgegrid": "^3.0.8",
     "env-yaml": "^0.1.2"
+  },
+  "devDependencies": {
+    "node-mocks-http": "^1.16.2",
+    "sinon": "^19.0.2",
+    "tape": "^5.9.0"
   }
 }
