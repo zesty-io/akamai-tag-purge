@@ -55,7 +55,7 @@ curl --location --request POST 'https://us-central1-PROJECT-NAME.cloudfunctions.
 
 Vanilla Javascript
 
-```
+```JavaScript
 var myHeaders = new Headers();
 myHeaders.append("X-Auth", "xxxxx");
 myHeaders.append("Content-Type", "text/plain");

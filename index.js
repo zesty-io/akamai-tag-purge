@@ -3,7 +3,7 @@ require("env-yaml").config();
 const cors = require("cors")();
 const EdgeGrid = require("akamai-edgegrid");
 
-exports.purgeAkamai = (req, res) => {
+exports.akamaiFastPurge = (req, res) => {
   // NOTE: We have wrapped this logic in a Promise to support
   // the test harness awaiting during the async operation of
   // the Akamai cache purge.

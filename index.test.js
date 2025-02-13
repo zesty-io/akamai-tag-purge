@@ -4,9 +4,9 @@ const test = require("tape");
 const sinon = require("sinon");
 const { createRequest, createResponse } = require("node-mocks-http");
 
-const { purgeAkamai } = require("./index.js");
+const { akamaiFastPurge } = require("./index.js");
 
-test("purgeAkamai: 400 Error: expected HTTP POST", async (t) => {
+test("akamaiFastPurge: 400 Error: expected HTTP POST", async (t) => {
   const req = createRequest({
     method: "GET",
     url: "/",
@@ -21,7 +21,7 @@ test("purgeAkamai: 400 Error: expected HTTP POST", async (t) => {
   sinon.spy(res, "status");
   sinon.spy(res, "json");
 
-  await purgeAkamai(req, res);
+  await akamaiFastPurge(req, res);
 
   t.doesNotThrow(() => sinon.assert.calledOnceWithExactly(res.status, 400));
   t.doesNotThrow(() =>
@@ -33,7 +33,7 @@ test("purgeAkamai: 400 Error: expected HTTP POST", async (t) => {
   t.end();
 });
 
-test(`purgeAkamai: 400 Error: Requires "X-Auth" header with Service Key`, async (t) => {
+test(`akamaiFastPurge: 400 Error: Requires "X-Auth" header with Service Key`, async (t) => {
   const req = createRequest({
     method: "POST",
     url: "/",
@@ -48,7 +48,7 @@ test(`purgeAkamai: 400 Error: Requires "X-Auth" header with Service Key`, async 
   sinon.spy(res, "status");
   sinon.spy(res, "json");
 
-  await purgeAkamai(req, res);
+  await akamaiFastPurge(req, res);
 
   t.doesNotThrow(() => sinon.assert.calledOnceWithExactly(res.status, 400));
   t.doesNotThrow(() =>
@@ -60,7 +60,7 @@ test(`purgeAkamai: 400 Error: Requires "X-Auth" header with Service Key`, async 
   t.end();
 });
 
-test(`purgeAkamai: 401 Error: Unauthorized`, async (t) => {
+test(`akamaiFastPurge: 401 Error: Unauthorized`, async (t) => {
   const req = createRequest({
     method: "POST",
     url: "/",
@@ -76,7 +76,7 @@ test(`purgeAkamai: 401 Error: Unauthorized`, async (t) => {
   sinon.spy(res, "status");
   sinon.spy(res, "json");
 
-  await purgeAkamai(req, res);
+  await akamaiFastPurge(req, res);
 
   t.doesNotThrow(() => sinon.assert.calledOnceWithExactly(res.status, 401));
   t.doesNotThrow(() =>
@@ -88,7 +88,7 @@ test(`purgeAkamai: 401 Error: Unauthorized`, async (t) => {
   t.end();
 });
 
-test(`purgeAkamai: 200 Success`, async (t) => {
+test(`akamaiFastPurge: 200 Success`, async (t) => {
   const req = createRequest({
     method: "POST",
     url: "/",
@@ -106,7 +106,7 @@ test(`purgeAkamai: 200 Success`, async (t) => {
   sinon.spy(res, "status");
   sinon.spy(res, "json");
 
-  await purgeAkamai(req, res);
+  await akamaiFastPurge(req, res);
 
   t.doesNotThrow(() => {
     sinon.assert.calledOnceWithExactly(res.status, 200);
