@@ -4,7 +4,8 @@
   "description": "GCP cloud function to purge by cache tags in Akamai",
   "main": "index.js",
   "scripts": {
-    "test": "node index.test.js"
+    "test": "node index.test.js",
+    "deploy:example": "gcloud functions deploy akamaiFastPurge --runtime=nodejs20 --region=us-central1 --trigger-http --allow-unauthenticated --project=PROJECT --memory=256mb"
   },
   "repository": {
     "type": "git",
