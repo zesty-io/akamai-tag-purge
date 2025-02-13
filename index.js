@@ -43,7 +43,7 @@ exports.akamaiFastPurge = (req, res) => {
         process.env.AKAMAI_CLIENT_SECRET,
         process.env.AKAMAI_ACCESS_TOKEN,
         process.env.AKAMAI_HOST,
-        process.env.AKAMAI_DEBUG === "false" ? false : true // yaml does not maintain type
+        process.env.AKAMAI_DEBUG === "true" ? true : false // yaml does not maintain type
       );
 
       eg.auth({
