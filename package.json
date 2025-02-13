@@ -1,5 +1,5 @@
 {
-  "name": "purge-akamai",
+  "name": "akamai-tag-purge",
   "version": "1.0.0",
   "description": "GCP cloud function to purge by cache tags in Akamai",
   "main": "index.js",
@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zesty-io/purge-akamai.git"
+    "url": "git+https://github.com/zesty-io/akamai-tag-purge.git"
   },
   "keywords": [
     "akamai",
@@ -20,9 +20,9 @@
   "author": "Zesty.io",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/zesty-io/purge-akamai/issues"
+    "url": "https://github.com/zesty-io/akamai-tag-purge/issues"
   },
-  "homepage": "https://github.com/zesty-io/purge-akamai#readme",
+  "homepage": "https://github.com/zesty-io/akamai-tag-purge#readme",
   "dependencies": {
     "akamai-edgegrid": "^3.5.2",
     "cors": "^2.8.5",
